@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers(정적 자산) 배포 설정 — Astro 빌드 결과물(dist)을 정적 사이트로 서빙합니다.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "easycleancare",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./dist",
+    // 존재하지 않는 경로 요청 시 404 페이지 처리 (정적 다중 페이지 사이트 기준)
+    "not_found_handling": "404-page"
+  }
+}
