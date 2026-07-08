@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" width="480" height="600" role="img" aria-label="깨끗하게 정돈된 프리미엄 주거 공간">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f8f4"/>
+      <stop offset="1" stop-color="#e8efe9"/>
+    </linearGradient>
+    <linearGradient id="light" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efe9df"/>
+      <stop offset="1" stop-color="#e3dccd"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="600" fill="url(#wall)"/>
+  <!-- 바닥 -->
+  <rect y="430" width="480" height="170" fill="url(#floor)"/>
+  <!-- 창문 (빛) -->
+  <rect x="60" y="70" width="220" height="300" rx="6" fill="#ffffff"/>
+  <rect x="60" y="70" width="220" height="300" rx="6" fill="none" stroke="#14342b" stroke-opacity="0.12" stroke-width="3"/>
+  <line x1="170" y1="70" x2="170" y2="370" stroke="#14342b" stroke-opacity="0.12" stroke-width="3"/>
+  <line x1="60" y1="220" x2="280" y2="220" stroke="#14342b" stroke-opacity="0.12" stroke-width="3"/>
+  <!-- 빛 번짐 -->
+  <polygon points="70,80 270,80 360,470 20,470" fill="url(#light)" opacity="0.7"/>
+  <!-- 식물 (케어·자연 상징) -->
+  <rect x="330" y="360" width="70" height="80" rx="6" fill="#dfe7df"/>
+  <path d="M365 360 C 345 320 350 285 365 260 C 380 285 385 320 365 360 Z" fill="#2d6a4f" opacity="0.85"/>
+  <path d="M365 360 C 340 335 322 320 315 300 C 345 305 362 330 365 360 Z" fill="#14342b" opacity="0.7"/>
+  <path d="M365 360 C 390 335 408 320 415 300 C 385 305 368 330 365 360 Z" fill="#2d6a4f" opacity="0.6"/>
+  <!-- 소파 라인 -->
+  <rect x="40" y="430" width="250" height="70" rx="16" fill="#ffffff"/>
+  <rect x="40" y="430" width="250" height="70" rx="16" fill="none" stroke="#14342b" stroke-opacity="0.08" stroke-width="2"/>
+  <rect x="55" y="415" width="70" height="30" rx="10" fill="#eef2ee"/>
+  <rect x="135" y="415" width="70" height="30" rx="10" fill="#e3ece4"/>
+</svg>

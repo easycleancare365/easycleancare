@@ -1,0 +1,60 @@
+---
+import { reviews } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+---
+<section id="reviews" class="py-20 md:py-28 bg-ivory">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <SectionHeading
+      eyebrow="Customer Reviews"
+      title="고객이 먼저 <span class='text-brand'>추천하는 이유</span>"
+      desc="입주의 첫 순간을 함께한 고객님들의 실제 후기입니다."
+    />
+  </div>
+
+  <!-- 가로 스크롤 슬라이드 (scroll-snap, 경량) -->
+  <div class="reveal mt-14">
+    <div class="ba-reviews flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth px-5 sm:px-8 pb-4 [scrollbar-width:none] [-ms-overflow-style:none]" data-reviews>
+      {reviews.map((r) => (
+        <article class="snap-start shrink-0 w-[85%] sm:w-[380px] rounded-2xl bg-surface border hairline p-7 shadow-sm">
+          <div class="flex items-center gap-1">
+            {Array.from({ length: r.rating }).map(() => (
+              <Icon name="star" class="w-4 h-4 text-gold" />
+            ))}
+          </div>
+          <p class="mt-4 text-[15px] leading-relaxed text-ink/85">“{r.text}”</p>
+          <div class="mt-6 pt-5 border-t hairline">
+            <p class="text-sm font-bold text-ink">{r.name}</p>
+            <p class="text-xs text-muted mt-0.5">{r.meta}</p>
+          </div>
+        </article>
+      ))}
+      <div class="shrink-0 w-1 sm:w-4" aria-hidden="true"></div>
+    </div>
+
+    <!-- 화살표 컨트롤 -->
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 mt-6 flex gap-3">
+      <button data-rev-prev class="grid place-items-center h-11 w-11 rounded-full border hairline bg-surface text-brand hover:bg-brand hover:text-cream transition-colors" aria-label="이전 후기">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6" /></svg>
+      </button>
+      <button data-rev-next class="grid place-items-center h-11 w-11 rounded-full border hairline bg-surface text-brand hover:bg-brand hover:text-cream transition-colors" aria-label="다음 후기">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ba-reviews::-webkit-scrollbar { display: none; }
+</style>
+
+<script>
+  const track = document.querySelector<HTMLElement>('[data-reviews]');
+  const prev = document.querySelector<HTMLButtonElement>('[data-rev-prev]');
+  const next = document.querySelector<HTMLButtonElement>('[data-rev-next]');
+  if (track) {
+    const step = () => Math.min(track.clientWidth * 0.9, 400);
+    prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  }
+</script>

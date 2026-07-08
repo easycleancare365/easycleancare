@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="줄눈 시공 전">
+  <rect width="640" height="480" fill="#cfc9bd"/>
+  <g stroke="#8a8375" stroke-width="6">
+    <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+    <line x1="0" y1="360" x2="640" y2="360"/><line x1="160" y1="0" x2="160" y2="480"/>
+    <line x1="320" y1="0" x2="320" y2="480"/><line x1="480" y1="0" x2="480" y2="480"/>
+  </g>
+  <g fill="#6b6456" opacity="0.55">
+    <rect x="150" y="110" width="24" height="24"/><rect x="310" y="230" width="24" height="24"/>
+    <rect x="470" y="350" width="24" height="24"/><rect x="150" y="350" width="24" height="24"/>
+  </g>
+  <text x="320" y="255" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="34" font-weight="700" fill="#4d4739" opacity="0.55">BEFORE</text>
+</svg>

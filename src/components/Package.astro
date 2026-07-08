@@ -1,0 +1,51 @@
+---
+import { packageItems, contact } from '../data/site';
+import Icon from './Icon.astro';
+---
+<section id="package" class="py-20 md:py-28 bg-brand text-cream relative overflow-hidden">
+  <div class="pointer-events-none absolute inset-0 -z-0" aria-hidden="true">
+    <div class="absolute -top-20 right-0 h-96 w-96 rounded-full bg-brand-500/30 blur-3xl"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="reveal">
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-cream/70">
+          <span class="h-px w-6 bg-cream/40"></span>
+          Home Care Package
+        </span>
+        <h2 class="mt-4 text-3xl sm:text-4xl md:text-[2.75rem] font-bold leading-[1.15]">
+          청소와 시공을<br />
+          <span class="text-[#b7d9c6]">한 번의 상담으로</span>
+        </h2>
+        <p class="mt-5 text-base sm:text-lg leading-relaxed text-cream/75 max-w-xl">
+          입주청소, 줄눈, 탄성코트, 새집증후군 케어를 각각 다른 업체에 맡기지 마세요.
+          이지클린홈케어는 통합 상담으로 일정과 비용을 한 번에 정리해 드립니다.
+        </p>
+
+        <div class="mt-8">
+          <a
+            href={contact.kakaoUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-full bg-cream text-brand font-semibold px-7 py-3.5 hover:bg-white hover:-translate-y-0.5 transition-all"
+          >
+            패키지 통합 상담하기
+            <Icon name="arrow" class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+
+      <ul class="reveal grid gap-3" data-delay="2">
+        {packageItems.map((item) => (
+          <li class="flex items-start gap-4 rounded-2xl bg-cream/8 backdrop-blur border border-cream/10 px-5 py-4">
+            <span class="grid place-items-center h-8 w-8 shrink-0 rounded-lg bg-cream/15 text-cream">
+              <Icon name="check" class="w-5 h-5" />
+            </span>
+            <p class="text-sm sm:text-base leading-relaxed text-cream/90">{item}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

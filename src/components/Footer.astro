@@ -1,0 +1,46 @@
+---
+import { site, contact } from '../data/site';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+---
+<footer class="bg-brand text-cream/80">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 py-14 md:py-20">
+    <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <span class="grid place-items-center h-9 w-9 rounded-xl bg-cream/10 text-cream">
+            <Icon name="sparkle" class="w-5 h-5" />
+          </span>
+          <span class="text-lg font-bold text-cream">{site.name}</span>
+        </div>
+        <p class="mt-5 max-w-sm text-sm leading-relaxed text-cream/70">
+          입주청소부터 줄눈·탄성코트·새집증후군 케어까지, 신규 입주에 필요한 프리미엄 홈케어를 한 번에 상담하세요.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold text-cream">서비스</h3>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          <li><a href="#services" class="hover:text-cream transition-colors">입주청소 · 이사청소</a></li>
+          <li><a href="#services" class="hover:text-cream transition-colors">줄눈 시공</a></li>
+          <li><a href="#services" class="hover:text-cream transition-colors">탄성코트</a></li>
+          <li><a href="#services" class="hover:text-cream transition-colors">새집증후군 케어</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold text-cream">문의</h3>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          <li class="flex items-center gap-2"><Icon name="phone" class="w-4 h-4" /> {contact.phoneDisplay}</li>
+          <li class="flex items-center gap-2"><Icon name="pin" class="w-4 h-4" /> {site.region}</li>
+          <li class="flex items-center gap-2"><Icon name="clock" class="w-4 h-4" /> {site.hours}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-cream/15 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs text-cream/50">
+      <p>© {year} {site.name}. All rights reserved.</p>
+      <p>{site.nameEn} · {site.domain}</p>
+    </div>
+  </div>
+</footer>

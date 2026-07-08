@@ -1,0 +1,26 @@
+---
+import { processSteps } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+---
+<section id="process" class="py-20 md:py-28 bg-cream">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <SectionHeading
+      eyebrow="How It Works"
+      title="문의부터 완료까지 <span class='text-brand'>6단계</span>"
+      desc="복잡한 과정 없이, 상담 한 번으로 시작됩니다."
+    />
+
+    <ol class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {processSteps.map((p, i) => (
+        <li
+          class="reveal relative rounded-2xl bg-surface border hairline p-7 hover:border-brand/30 transition-colors"
+          data-delay={String((i % 3) + 1)}
+        >
+          <span class="text-4xl font-bold text-brand-soft select-none">{p.step}</span>
+          <h3 class="mt-2 text-lg font-bold text-ink">{p.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{p.desc}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

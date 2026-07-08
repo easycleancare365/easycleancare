@@ -1,0 +1,83 @@
+---
+import { site, contact } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+const channels = [
+  { icon: 'chat', label: '카카오톡 상담', desc: '가장 빠른 실시간 상담', href: contact.kakaoUrl, cta: '채널 추가하고 상담', accent: 'bg-[#FEE500] text-[#3A2929]', external: true },
+  { icon: 'phone', label: '전화 문의', desc: contact.phoneDisplay, href: `tel:${contact.phoneRaw}`, cta: '지금 전화하기', accent: 'bg-brand text-cream', external: false },
+  { icon: 'message', label: '문자 견적', desc: '지역·평형·일정 남기기', href: contact.smsHref, cta: '문자로 견적 요청', accent: 'bg-brand-soft text-brand', external: false },
+  { icon: 'check', label: '온라인 견적 폼', desc: '양식 작성 후 접수', href: contact.formUrl, cta: '견적 폼 작성하기', accent: 'bg-ivory text-ink', external: true },
+];
+---
+<section id="contact" class="py-20 md:py-28 bg-cream">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <SectionHeading
+      eyebrow="Contact"
+      title="지금, <span class='text-brand'>상담을 시작하세요</span>"
+      desc="입주 일정이 정해졌다면 서두르는 것이 좋습니다. 편한 방법으로 문의해 주세요."
+    />
+
+    <div class="mt-14 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start">
+      <!-- 문의 채널 카드 -->
+      <div class="grid sm:grid-cols-2 gap-4">
+        {channels.map((c, i) => (
+          <a
+            href={c.href}
+            target={c.external ? '_blank' : undefined}
+            rel={c.external ? 'noopener' : undefined}
+            class="reveal group flex flex-col rounded-2xl bg-surface border hairline p-6 hover:border-brand/30 hover:shadow-[0_20px_40px_-24px_rgba(20,52,43,0.4)] hover:-translate-y-1 transition-all"
+            data-delay={String((i % 2) + 1)}
+          >
+            <span class={`grid place-items-center h-12 w-12 rounded-xl ${c.accent}`}>
+              <Icon name={c.icon} class="w-6 h-6" />
+            </span>
+            <h3 class="mt-4 text-lg font-bold text-ink">{c.label}</h3>
+            <p class="mt-1 text-sm text-muted">{c.desc}</p>
+            <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand group-hover:gap-2.5 transition-all">
+              {c.cta}
+              <Icon name="arrow" class="w-4 h-4" />
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <!-- 운영 정보 -->
+      <div class="reveal rounded-2xl bg-brand text-cream p-8" data-delay="2">
+        <h3 class="text-xl font-bold">운영 안내</h3>
+        <dl class="mt-6 space-y-5">
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center h-9 w-9 shrink-0 rounded-lg bg-cream/12"><Icon name="pin" class="w-5 h-5" /></span>
+            <div>
+              <dt class="text-xs text-cream/60">서비스 지역</dt>
+              <dd class="text-sm font-semibold mt-0.5">{site.region}</dd>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center h-9 w-9 shrink-0 rounded-lg bg-cream/12"><Icon name="clock" class="w-5 h-5" /></span>
+            <div>
+              <dt class="text-xs text-cream/60">운영 시간</dt>
+              <dd class="text-sm font-semibold mt-0.5">{site.hours}</dd>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center h-9 w-9 shrink-0 rounded-lg bg-cream/12"><Icon name="phone" class="w-5 h-5" /></span>
+            <div>
+              <dt class="text-xs text-cream/60">대표 문의</dt>
+              <dd class="text-sm font-semibold mt-0.5">{contact.phoneDisplay}</dd>
+            </div>
+          </div>
+        </dl>
+        <a
+          href={contact.kakaoUrl}
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex w-full justify-center items-center gap-2 rounded-full bg-cream text-brand font-semibold py-3.5 hover:bg-white transition-colors"
+        >
+          <Icon name="chat" class="w-5 h-5" />
+          카카오톡으로 바로 상담
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

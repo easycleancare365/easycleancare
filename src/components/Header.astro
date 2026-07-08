@@ -1,0 +1,121 @@
+---
+import { site, contact } from '../data/site';
+import Icon from './Icon.astro';
+
+const nav = [
+  { href: '#services', label: '서비스' },
+  { href: '#package', label: '홈케어 패키지' },
+  { href: '#gallery', label: '작업 사례' },
+  { href: '#reviews', label: '고객 후기' },
+  { href: '#process', label: '진행 절차' },
+  { href: '#faq', label: 'FAQ' },
+];
+---
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div
+      id="header-inner"
+      class="flex items-center justify-between h-16 md:h-[72px] transition-all duration-300"
+    >
+      <!-- 로고 -->
+      <a href="#top" class="flex items-center gap-2.5 group" aria-label={site.name}>
+        <span class="grid place-items-center h-9 w-9 rounded-xl bg-brand text-cream">
+          <Icon name="sparkle" class="w-5 h-5" />
+        </span>
+        <span class="flex flex-col leading-none">
+          <span class="text-[15px] font-bold text-ink">{site.name}</span>
+          <span class="text-[10px] tracking-[0.25em] uppercase text-muted">{site.nameEn}</span>
+        </span>
+      </a>
+
+      <!-- 데스크톱 내비 -->
+      <nav class="hidden lg:flex items-center gap-8">
+        {nav.map((n) => (
+          <a href={n.href} class="text-sm font-medium text-muted hover:text-brand transition-colors">
+            {n.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA / 모바일 토글 -->
+      <div class="flex items-center gap-2">
+        <a
+          href={`tel:${contact.phoneRaw}`}
+          class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-500 transition-colors px-3 py-2"
+        >
+          <Icon name="phone" class="w-4 h-4" />
+          {contact.phoneDisplay}
+        </a>
+        <a
+          href={contact.kakaoUrl}
+          target="_blank"
+          rel="noopener"
+          class="hidden md:inline-flex items-center gap-2 rounded-full bg-brand text-cream text-sm font-semibold px-5 py-2.5 hover:bg-brand-500 transition-colors shadow-sm"
+        >
+          카카오톡 상담
+        </a>
+        <button
+          id="menu-toggle"
+          class="lg:hidden grid place-items-center h-10 w-10 rounded-lg text-ink hover:bg-ink/5 transition-colors"
+          aria-label="메뉴 열기"
+          aria-expanded="false"
+        >
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모바일 메뉴 -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-surface/98 backdrop-blur-md border-t hairline">
+    <nav class="mx-auto max-w-7xl px-5 py-4 flex flex-col">
+      {nav.map((n) => (
+        <a href={n.href} class="py-3 text-base font-medium text-ink border-b hairline last:border-0" data-close>
+          {n.label}
+        </a>
+      ))}
+      <a
+        href={contact.kakaoUrl}
+        target="_blank"
+        rel="noopener"
+        class="mt-4 inline-flex justify-center rounded-full bg-brand text-cream font-semibold py-3"
+        data-close
+      >
+        카카오톡 상담하기
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const inner = document.getElementById('header-inner');
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  // 스크롤 시 헤더 배경 강조
+  const onScroll = () => {
+    if (window.scrollY > 12) {
+      header?.classList.add('bg-cream/85', 'backdrop-blur-md', 'shadow-[0_1px_0_0_rgba(0,0,0,0.05)]');
+      inner?.classList.add('h-14', 'md:h-16');
+    } else {
+      header?.classList.remove('bg-cream/85', 'backdrop-blur-md', 'shadow-[0_1px_0_0_rgba(0,0,0,0.05)]');
+      inner?.classList.remove('h-14', 'md:h-16');
+    }
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // 모바일 메뉴 토글
+  const closeMenu = () => {
+    menu?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  menu?.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeMenu));
+</script>

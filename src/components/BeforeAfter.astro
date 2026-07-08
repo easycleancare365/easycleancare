@@ -1,0 +1,85 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+// 실제 현장 사진으로 교체하세요. (public/images/) — WebP/AVIF 권장
+const cases = [
+  { id: 'ba1', label: '입주청소 · 34평', before: '/images/before-1.svg', after: '/images/after-1.svg' },
+  { id: 'ba2', label: '욕실 줄눈 시공', before: '/images/before-2.svg', after: '/images/after-2.svg' },
+];
+---
+<section id="gallery" class="py-20 md:py-28 bg-cream">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <SectionHeading
+      eyebrow="Before & After"
+      title="결과로 보여드리는 <span class='text-brand'>이지클린의 기준</span>"
+      desc="실제 현장의 변화입니다. 슬라이더를 좌우로 움직여 시공 전후를 직접 확인해 보세요."
+    />
+
+    <div class="mt-14 grid gap-8 lg:grid-cols-2">
+      {cases.map((c, i) => (
+        <figure class="reveal" data-delay={String(i + 1)}>
+          <div
+            class="ba-slider group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border hairline shadow-sm select-none cursor-ew-resize"
+            data-ba
+          >
+            <!-- After (아래 레이어, 전체) -->
+            <img src={c.after} alt={`${c.label} 작업 후`} class="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" width="640" height="480" />
+            <span class="absolute right-3 bottom-3 rounded-full bg-brand/90 px-3 py-1 text-xs font-semibold text-cream">After</span>
+
+            <!-- Before (위 레이어, clip 조절) -->
+            <div class="ba-before absolute inset-0 overflow-hidden" style="width:50%">
+              <img src={c.before} alt={`${c.label} 작업 전`} class="ba-before-img absolute inset-0 h-full object-cover" style="max-width:none;width:100%" loading="lazy" decoding="async" width="640" height="480" />
+              <span class="absolute left-3 bottom-3 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold text-cream">Before</span>
+            </div>
+
+            <!-- 핸들 -->
+            <div class="ba-handle absolute top-0 bottom-0 -ml-px w-0.5 bg-cream" style="left:50%">
+              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 grid place-items-center h-10 w-10 rounded-full bg-cream shadow-lg text-brand">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 7l-4 5 4 5M15 7l4 5-4 5" />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <figcaption class="mt-4 text-sm font-medium text-muted">{c.label}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ba]').forEach((el) => {
+    const before = el.querySelector<HTMLElement>('.ba-before');
+    const handle = el.querySelector<HTMLElement>('.ba-handle');
+    const beforeImg = el.querySelector<HTMLElement>('.ba-before-img');
+    if (!before || !handle) return;
+
+    // before 이미지를 컨테이너 전체 폭에 고정해 after 이미지와 정확히 겹치게 함
+    const syncWidth = () => {
+      if (beforeImg) beforeImg.style.width = el.clientWidth + 'px';
+    };
+
+    const setPos = (clientX: number) => {
+      const rect = el.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(2, Math.min(98, pct));
+      before.style.width = pct + '%';
+      handle.style.left = pct + '%';
+    };
+
+    let active = false;
+    const stop = () => (active = false);
+    const move = (e: PointerEvent) => {
+      if (!active) return;
+      e.preventDefault();
+      setPos(e.clientX);
+    };
+
+    el.addEventListener('pointerdown', (e) => { active = true; setPos((e as PointerEvent).clientX); });
+    window.addEventListener('pointerup', stop);
+    window.addEventListener('pointermove', move, { passive: false });
+    window.addEventListener('resize', syncWidth, { passive: true });
+    syncWidth();
+  });
+</script>

@@ -1,0 +1,110 @@
+---
+import { contact, site } from '../data/site';
+import Icon from './Icon.astro';
+
+const badges = ['정직한 투명 견적', '검증된 전문 인력', '통합 홈케어 상담'];
+---
+<section class="relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24">
+  <!-- 은은한 배경 광원 (청결감·공기·빛의 추상 표현) -->
+  <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <div class="floaty absolute -top-24 -right-24 h-[32rem] w-[32rem] rounded-full bg-brand-soft blur-3xl opacity-70"></div>
+    <div class="floaty absolute top-40 -left-32 h-96 w-96 rounded-full bg-[#eef3ee] blur-3xl opacity-80" style="animation-delay:-4s"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-cream/0 via-cream/0 to-cream"></div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-8 items-center">
+      <!-- 좌: 카피 -->
+      <div class="reveal">
+        <span class="inline-flex items-center gap-2 rounded-full border hairline bg-surface/70 px-4 py-1.5 text-xs font-semibold text-brand-500">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-500"></span>
+          {site.region} · 프리미엄 입주 홈케어
+        </span>
+
+        <h1 class="mt-6 text-[2.1rem] leading-[1.18] sm:text-5xl md:text-[3.4rem] md:leading-[1.12] font-bold tracking-tight text-ink">
+          깨끗한 집의 시작,<br />
+          <span class="text-brand">이지클린홈케어</span>가<br class="hidden sm:block" />
+          완성합니다.
+        </h1>
+
+        <p class="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-muted">
+          입주청소부터 줄눈·탄성코트·새집증후군 케어까지,<br class="hidden sm:block" />
+          신규 입주에 필요한 홈케어 서비스를 한 번에 상담하세요.
+        </p>
+
+        <!-- CTA -->
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a
+            href={contact.kakaoUrl}
+            target="_blank"
+            rel="noopener"
+            class="group inline-flex items-center gap-2 rounded-full bg-brand text-cream font-semibold px-7 py-3.5 shadow-[0_10px_30px_-8px_rgba(20,52,43,0.5)] hover:bg-brand-500 hover:-translate-y-0.5 transition-all"
+          >
+            카카오톡으로 상담하기
+            <Icon name="arrow" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+          <a
+            href={`tel:${contact.phoneRaw}`}
+            class="inline-flex items-center gap-2 rounded-full border hairline bg-surface font-semibold px-6 py-3.5 text-ink hover:border-brand/40 transition-colors"
+          >
+            <Icon name="phone" class="w-4 h-4 text-brand" />
+            {contact.phoneDisplay}
+          </a>
+        </div>
+
+        <!-- 신뢰 배지 -->
+        <ul class="mt-9 flex flex-wrap gap-x-6 gap-y-3">
+          {badges.map((b) => (
+            <li class="flex items-center gap-2 text-sm font-medium text-ink/80">
+              <span class="grid place-items-center h-5 w-5 rounded-full bg-brand-soft text-brand">
+                <Icon name="check" class="w-3.5 h-3.5" />
+              </span>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- 우: 추상 프리미엄 공간 비주얼 -->
+      <div class="reveal" data-delay="2">
+        <div class="relative aspect-[4/5] sm:aspect-[5/5] lg:aspect-[4/5] max-w-md mx-auto">
+          <!-- 메인 카드 (깨끗한 주거 공간 이미지 자리) -->
+          <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-20px_rgba(20,52,43,0.35)] bg-gradient-to-br from-[#f6f7f3] to-brand-soft">
+            <img
+              src="/images/hero-space.svg"
+              alt="깨끗하게 정돈된 프리미엄 주거 공간"
+              class="h-full w-full object-cover"
+              width="480"
+              height="600"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </div>
+
+          <!-- 플로팅 신뢰 카드 -->
+          <div class="absolute -left-3 sm:-left-6 bottom-10 rounded-2xl bg-surface/95 backdrop-blur px-4 py-3 shadow-xl border hairline">
+            <div class="flex items-center gap-3">
+              <span class="grid place-items-center h-10 w-10 rounded-xl bg-brand text-cream">
+                <Icon name="leaf" class="w-5 h-5" />
+              </span>
+              <div class="leading-tight">
+                <p class="text-xs text-muted">친환경 자재 사용</p>
+                <p class="text-sm font-bold text-ink">아이·반려동물 안심</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute -right-2 sm:-right-5 top-8 rounded-2xl bg-surface/95 backdrop-blur px-4 py-3 shadow-xl border hairline">
+            <div class="flex items-center gap-2">
+              {Array.from({ length: 5 }).map(() => (
+                <Icon name="star" class="w-4 h-4 text-gold" />
+              ))}
+            </div>
+            <p class="mt-1 text-xs font-semibold text-ink">고객 만족도 98%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

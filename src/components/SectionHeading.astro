@@ -1,0 +1,22 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  desc?: string;
+  align?: 'left' | 'center';
+}
+const { eyebrow, title, desc, align = 'center' } = Astro.props;
+const alignCls = align === 'center' ? 'text-center mx-auto items-center' : 'text-left items-start';
+---
+<div class={`flex flex-col ${alignCls} max-w-2xl reveal`}>
+  {eyebrow && (
+    <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-500">
+      <span class="h-px w-6 bg-brand-500/50"></span>
+      {eyebrow}
+    </span>
+  )}
+  <h2 class="mt-4 text-3xl sm:text-4xl md:text-[2.75rem] font-bold leading-[1.15] text-ink">
+    <Fragment set:html={title} />
+  </h2>
+  {desc && <p class="mt-5 text-base sm:text-lg leading-relaxed text-muted">{desc}</p>}
+</div>
